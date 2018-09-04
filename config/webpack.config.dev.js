@@ -88,6 +88,7 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      '@': path.resolve(__dirname, '../src')
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -208,6 +209,13 @@ module.exports = {
             test: /\.scss$/,
             loaders: ['style-loader', 'css-loader', 'sass-loader']
           },
+          {
+            test: /\.scss$/,
+            loaders: 'sass-resources-loader',
+            options: {
+              resources: path.resolve(__dirname, '../src/assets/css/common.scss')
+           }
+          }
         ],
       },
       // ** STOP ** Are you adding a new loader?
