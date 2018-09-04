@@ -1,0 +1,51 @@
+html, body {
+  height: 100%;
+  overflow: auto;
+  background: #f5f5f5;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    font-family: arial, helvetica, STHeitiSC-Light, Heiti SC, droidsansfallback, dengxian, microsoft yahei;
+    -webkit-font-smoothing: antialiased
+}
+
+ul, li {
+    list-style: none
+}
+
+html, body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    color: #333;
+    background: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+a {
+    color: #000;
+    text-decoration: none
+}
+
+a:focus {
+    outline: dotted thin;
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-offset: -2px
+}
+
+input, select, option {
+    -webkit-appearance: none;
+    border: none;
+    background: #fff;
+}
