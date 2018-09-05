@@ -232,6 +232,22 @@ module.exports = {
             test: /\.scss$/,
             loaders: ['style-loader', 'css-loader', 'sass-loader']
           },
+          {
+            test: /\.scss$/,
+            use: [{
+              loader: 'style-loader'
+            }, {
+              loader: 'css-loader'
+            }, {
+              loader: 'sass-loader'
+            }, {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: './src/assets/style/common.scss'
+                }
+              }
+            ],
+          },
           // ** STOP ** Are you adding a new loader?
           // Make sure to add the new loader(s) before the "file" loader.
         ],

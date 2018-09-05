@@ -7,8 +7,82 @@
     height: 55px;
     width: 1440px;
     margin: 0 auto;
-    // .head_logo {
-    //   color: $color;
-    // }
+    position: relative;
+    .head_logo {
+      color: $colorRed;
+      font-size: 26px;
+      padding-left: 20px;
+      width: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-weight: 700;
+    }
+    .head_center {
+      width: 945px;
+      height: 55px;
+      line-height: 55px;
+      margin: 0 auto;
+      padding: 0 10px;
+      font-size: 17px;
+      i {
+        color: $colorBlack;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .active_i {
+        color: $colorRed;
+      }
+      .icon-shoujixiazai {
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+      .input_search {
+        width: 240px;
+        transition: width .5s linear;
+      }
+      .input_search input {
+        background: #eee;
+        border-radius: 16px;
+        outline: none;
+      }
+      .input_search_focused {
+        width: 320px;
+      }
+    }
+    .head_set {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 55px;
+      font-size: 16px;
+      span {
+        display: inline-block;
+        margin-right: 30px;
+        color: $colorGray;
+        text-align: center;
+        cursor: pointer;
+      }
+      .head_style {
+        font-weight: 700;
+      }
+      .head_register {
+        width: 80px;
+        height: 38px;
+        line-height: 36px;
+        border: 1px solid $colorRed;
+        border-radius: 20px;
+        color: $colorRed;
+      }
+      .head_write {
+        width: 100px;
+        height: 40px;
+        color: #fff;
+        background: $colorRed;
+        border-radius: 20px;
+        line-height: 40px;
+        text-align: center;
+      }
+    }
   }
 }
