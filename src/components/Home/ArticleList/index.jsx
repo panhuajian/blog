@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ArticleData from '@/assets/mock/article.json'
-import articleImg from '@/assets/img/article.jpg'
+import articleImg from '@/assets/img/article.png'
 import './index.scss'
 
 export default class ArticleList extends Component {
