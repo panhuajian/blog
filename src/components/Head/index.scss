@@ -2,7 +2,6 @@
   height: 56px;
   line-height: 55px;
   border-bottom: 1px solid #f0f0f0;
-  background: #fff;
   .head_cont {
     height: 55px;
     width: 1440px;
@@ -25,17 +24,19 @@
       margin: 0 auto;
       padding: 0 10px;
       font-size: 17px;
-      i {
+      span {
         color: $colorBlack;
         font-size: 20px;
         cursor: pointer;
       }
-      .active_i {
+      i {
+        font-size: 20px;
+      }
+      .active_span {
         color: $colorRed;
       }
-      .icon-shoujixiazai {
-        margin-left: 40px;
-        margin-right: 40px;
+      & > span:nth-child(2) {
+        margin: 0 40px;
       }
       .input_search {
         width: 240px;

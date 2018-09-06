@@ -1,0 +1,43 @@
+.article_list {
+  ul li {
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // color: $colorGray;
+    .li_content {
+      width: 483px;
+      .title {
+        line-height: 27px;
+        font-size: 18px;
+        color: $colorBlack;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .cont {
+        font-size: 13px;
+        line-height: 24px;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;  //这里是在第二行有省略号
+        overflow: hidden;
+      }
+      .other_info {
+        line-height: 20px;
+        font-size: 0;
+        span {
+          font-size: 12px;
+          margin-right: 10px;
+        }
+        i {
+          font-size: 12px;
+        }
+      }
+    }
+    .article_img img {
+      width: 125px;
+      height: 100px;
+    }
+  }
+}

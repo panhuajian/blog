@@ -1,0 +1,10 @@
+.banner {
+  overflow: hidden;
+  position: relative;
+  .banner_cont {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+  }
+}

@@ -5,17 +5,23 @@
 body {
   color: #969696;
 }
+.ant-popover-title {
+  padding: 0;
+}
 .set_title {
   color: $colorGray;
   height: 100px;
   width: 215px;
-  padding: 0 20px 20px 20px;
-  line-height: 100px;
+  padding: 20px 20px 0 20px;
+  line-height: 80px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
   .title_button {
     width: 44px;
     height: 40px;
     text-align: center;
-    border: 1px solid $colorGray;
+    border: 1px solid $borderGray;
     line-height: 38px;
     border-radius: 0;
   }
