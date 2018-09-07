@@ -230,10 +230,6 @@ module.exports = {
           },
           {
             test: /\.scss$/,
-            loaders: ['style-loader', 'css-loader', 'sass-loader']
-          },
-          {
-            test: /\.scss$/,
             use: [{
               loader: 'style-loader'
             }, {

@@ -1,0 +1,52 @@
+.cont_left {
+  width: 280px;
+  .left_hot {
+    li {
+      margin-bottom: 6px;
+      img {
+       width: 280px;
+       height: 50px;
+       cursor: pointer;
+     }
+    }
+  }
+  .recomment_author {
+    margin-top: 30px;
+    .recomment_title {
+      display: flex;
+      justify-content: space-between;
+      line-height: 16px;
+    }
+    ul li {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      height: 48px;
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      & > div {
+        width: 222px;
+        line-height: 20px;
+        & > div:nth-child(1) {
+          display: flex;
+          justify-content: space-between;
+          cursor: pointer;
+          span:nth-child(1) {
+            color: $colorBlack;
+          }
+          span:nth-child(2) {
+            color: $colorGreen;
+          }
+        }
+        & > div:nth-child(2) {
+          font-size: 12px;
+          color: $colorGray;
+        }
+      }
+    }
+  }
+}

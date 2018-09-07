@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ArticleData from '@/assets/mock/article.json'
 import articleImg from '@/assets/img/article.png'
+import { Link } from 'react-router-dom'
 import './index.scss'
 
 export default class ArticleList extends Component {
@@ -16,7 +17,7 @@ export default class ArticleList extends Component {
             return (
               <li key={i}>
                 <div className="li_content">
-                  <div className="title">{item.title}</div>
+                  <Link to={{pathname: '/article', params: {id: 1111}}} className="title">{item.title}</Link>
                   <p className="cont">{item.content}</p>
                   <div className="other_info">
                     <span>{item.author}</span>
