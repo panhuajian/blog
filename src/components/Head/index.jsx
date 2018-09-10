@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+// import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Input, Popover, Button } from 'antd'
 import './index.scss'
 
@@ -13,6 +15,9 @@ export default class Head extends Component {
       isNight: false,
       isShowPopover: false
     }
+  }
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   }
   changeIsHome () {
     this.setState({
@@ -59,6 +64,15 @@ export default class Head extends Component {
       </div>
     )
   }
+  // 路由跳转并传参
+  jumpWriting () {
+    this.context.router.history.push({
+      pathname: '/writing',
+      params: {
+        id: 222233333
+      }
+    })
+  }
   // setContentHtml () {
   //   return (
   //     <div className="set_cont">
@@ -75,6 +89,7 @@ export default class Head extends Component {
   // }
   render () {
     const { isHome, isFocus } = this.state
+    console.log('this.context', this.context)
     return (
       <div className="head">
         <div className="head_cont">
@@ -90,7 +105,7 @@ export default class Head extends Component {
             </Popover>
             <span className="head_login">登录</span>
             <span className="head_register">注册</span>
-            <span className="head_write"><i className="iconfont icon-bi-copy"> </i>写文章</span>
+            <span className="head_write" onClick={this.jumpWriting.bind(this)}><i className="iconfont icon-bi-copy"> </i>写文章</span>
           </div>
         </div>
       </div>

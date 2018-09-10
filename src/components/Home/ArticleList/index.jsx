@@ -17,7 +17,8 @@ export default class ArticleList extends Component {
             return (
               <li key={i}>
                 <div className="li_content">
-                  <Link to={{pathname: '/article', params: {id: 1111}}} className="title">{item.title}</Link>
+                  {/* 路由跳转并穿传参 */}
+                  <Link to={{pathname: '/article', params: {id: 1111222222222}}} className="title">{item.title}</Link>
                   <p className="cont">{item.content}</p>
                   <div className="other_info">
                     <span>{item.author}</span>

@@ -1,0 +1,48 @@
+.writing {
+  & > div {
+    height: 100%;
+  }
+  color: $colorPale;
+  height: 100%;
+  .wirting_left {
+    height: 100%;
+    background: $bgNeight;
+    font-size: 16px;
+    .return_home {
+      padding: 30px 18px 5px;
+      a {
+        display: block;
+        padding: 9px;
+        color: $colorRed;
+        text-align: center;
+        border: 1px solid $colorRed;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+    .set_corpus {
+      padding: 0 18px;
+      line-height: 40px;
+      font-size: 14px;
+      font-size: 14px;
+      i {
+        color: $colorPale;
+      }
+    }
+  }
+  .wirting_right {
+    height: 100%;
+    & > div {
+      height: 100%;
+      & > div {
+        height: 100%;
+      }
+    }
+    .set_article {
+      height: 100%;
+    }
+    .writing_article {
+      height: 100%;
+    }
+  }
+}

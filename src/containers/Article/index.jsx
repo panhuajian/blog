@@ -6,7 +6,7 @@ export default class Article extends Component {
     this.state = {}
   }
   render () {
-    console.log(this.props)
+    console.log('+++++++++++', this.props)
     return (
       <div>我是文章页</div>
     )
