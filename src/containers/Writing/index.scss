@@ -27,6 +27,22 @@
       font-size: 14px;
       i {
         color: $colorPale;
+        font-size: 12px;
+      }
+    }
+    .corpus_list {
+      li {
+        height: 40px;
+        line-height: 40px;
+        padding-left: 12px;
+        padding-right: 30px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      .corpus_active {
+        background: $bgGray;
+        border-left: 3px solid $colorRed;
       }
     }
   }
@@ -40,9 +56,33 @@
     }
     .set_article {
       height: 100%;
+      border-right: 1px solid $borderGray;
+      overflow-y: scroll;
+      .new_article {
+        padding: 20px 0 20px 25px;
+        line-height: 16px;
+        font-size: 15px;
+        color: $colorGray2;
+        i {
+          font-size: 12px;
+        }
+      }
     }
     .writing_article {
       height: 100%;
     }
+  }
+}
+.set_popover {
+  font-size: 12px;
+  i {
+    font-size: 12px;
+  }
+  width: 115px;
+  .ant-popover-title, .ant-popover-inner-content {
+    cursor: pointer;
+    min-width: 115px;
+    padding: 10px 20px;
+    line-height: 20px;
   }
 }

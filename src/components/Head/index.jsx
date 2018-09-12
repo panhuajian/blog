@@ -100,7 +100,7 @@ export default class Head extends Component {
             <Search className={!isFocus ? 'input_search' : 'input_search input_search_focused'} onFocus={this.focusHandler.bind(this)} onBlur={this.blurHandler.bind(this)} placeholder="搜索"/>
           </div>
           <div className="head_set">
-            <Popover placement="bottomRight" title={this.setTitleHtml()} trigger="click">
+            <Popover overlayClassName="sytle_popover" placement="bottomRight" title={this.setTitleHtml()} trigger="click">
               <span className="head_style">Aa</span>
             </Popover>
             <span className="head_login">登录</span>

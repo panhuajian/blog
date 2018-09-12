@@ -8,39 +8,3 @@ body {
 #root, .App {
   height: 100%;
 }
-.ant-popover-title {
-  padding: 0;
-}
-.set_title {
-  color: $colorGray;
-  height: 100px;
-  width: 215px;
-  padding: 20px 20px 0 20px;
-  line-height: 80px;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  .title_button {
-    width: 44px;
-    height: 40px;
-    text-align: center;
-    border: 1px solid $borderGray;
-    line-height: 38px;
-    border-radius: 0;
-  }
-  .title_turn_on {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-right: none;
-  }
-  .title_turn_off {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-left: none;
-  }
-  .title_button_active {
-    background: $bgBlue;
-    color: #fff;
-    border-color: $bgBlue;
-  }
-}
