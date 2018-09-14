@@ -6,9 +6,17 @@ import { connect } from 'react-redux'
 class Article extends Component {
   constructor () {
     super()
-    this.state = {}
+    this.state = {
+      init: 11
+    }
+    // this.numberAdd = this.numberAdd.bind(this)
   }
   numberAdd () {
+    debugger
+    let _this = this
+    console.log('this', this)
+    console.log('_this', _this)
+    console.log('------------', this.state)
     let count = this.props.count
     count++
     this.props.handlerNumberActions.changeCount(count)
