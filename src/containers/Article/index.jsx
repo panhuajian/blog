@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as handlerNumberActions from '@/actions/number.js'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import axios from '@/axios'
 
 class Article extends Component {
   constructor () {
@@ -26,6 +27,12 @@ class Article extends Component {
     count--
     this.props.handlerNumberActions.changeCount(count)
   }
+  getData () {
+    axios.axiosGet('/api/user', res => {
+      debugger
+      console.log(res)
+    })
+  }
   render () {
     console.log('+++++++++++', this.props)
     return (
@@ -34,6 +41,9 @@ class Article extends Component {
         <button onClick={this.numberAdd.bind(this)}>+</button>
         ------------------
         <button onClick={this.numberSubtract.bind(this)}>-</button>
+        <div>
+          <button  onClick={this.getData.bind(this)}>请求数据</button>
+        </div>
       </div>
     )
   }
