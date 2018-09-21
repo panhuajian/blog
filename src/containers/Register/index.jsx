@@ -2,16 +2,26 @@ import React, { Component } from 'react'
 import './index.scss'
 
 export default class Register extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      type: this.props.location.type
+    }
+  }
+  toggleType (type) {
+    this.setState({type})
+  }
   render () {
     debugger
     console.log(this)
+    const { type } = this.state
     return (
       <div className="register">
         <div className="cont">
           <div className="cont_title">
-            <a className="cont_login">登录</a>
+            <a onClick={this.toggleType.bind(this, 'login')} className={type === 'login' ? 'cont_login active_a' : 'cont_login'}>登录</a>
             <span>·</span>
-            <a className="cont_register active_a">注册</a>
+            <a onClick={this.toggleType.bind(this, 'register')} className={type === 'register' ? 'cont_register active_a' : 'cont_register'}>注册</a>
           </div>
           <div className="cont_info">
             <div><i className="iconfont icon-yonghu"></i><input type="text" placeholder="你的昵称"/></div>
