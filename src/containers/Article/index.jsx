@@ -28,7 +28,11 @@ class Article extends Component {
     this.props.handlerNumberActions.changeCount(count)
   }
   getData () {
-    axios.axiosGet('/api/user', res => {
+    let data = {
+      username: 'test4',
+      password: '123456' 
+    }
+    axios.axiosPost('http://panhuajian.com:3000/api/register', data, res => {
       debugger
       console.log(res)
     })

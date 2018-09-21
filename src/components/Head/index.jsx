@@ -73,6 +73,14 @@ export default class Head extends Component {
       }
     })
   }
+  registerHandler () {
+    this.context.router.history.push({
+      pathname: '/register',
+      params: {
+        type: 'register'
+      }
+    })
+  }
   // setContentHtml () {
   //   return (
   //     <div className="set_cont">
@@ -104,7 +112,7 @@ export default class Head extends Component {
               <span className="head_style">Aa</span>
             </Popover>
             <span className="head_login">登录</span>
-            <span className="head_register">注册</span>
+            <span className="head_register" onClick={this.registerHandler.bind(this)}>注册</span>
             <span className="head_write" onClick={this.jumpWriting.bind(this)}><i className="iconfont icon-bi-copy"> </i>写文章</span>
           </div>
         </div>

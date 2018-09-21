@@ -105,11 +105,5 @@
     "prop-types": "^15.6.2",
     "sass-loader": "^7.1.0",
     "sass-resources-loader": "^1.3.3"
-  },
-  "proxy":{
-    "/api/user":{
-       "target":"http://localhost:9999",
-       "changeOrigin": true
-     }
-   }
+  }
 }
