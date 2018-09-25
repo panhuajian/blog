@@ -47,6 +47,6 @@ a:focus {
 
 input, select, option {
     -webkit-appearance: none;
-    border: none;
+    /* border: none; */
     background: #fff;
 }

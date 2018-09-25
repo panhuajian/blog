@@ -54,7 +54,7 @@
       border-bottom-left-radius: 3px;
       border-bottom-right-radius: 3px;
     }
-    input {
+    .username_info {
       width: 300px;
       height: 50px;
       border: 1px solid $borderGray;
@@ -75,6 +75,18 @@
       text-align: center;
       margin-bottom: 10px;
       background: $colorGreen;
+    }
+    .remember_me {
+      line-height: 40px;
+      display: flex;
+      justify-content: space-between;
+      input {
+        width: 14px;
+        height: 14px;
+        border: 1px solid $borderGray;
+        border-radius: 2px;
+        vertical-align: middle;
+      }
     }
     p {
       line-height: 20px;

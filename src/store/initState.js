@@ -1,3 +1,4 @@
 export default {
-  count: 123
+  count: 123,
+  registerType: ''
 }

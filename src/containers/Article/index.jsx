@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import * as handlerNumberActions from '@/actions/number.js'
+import * as numberActions from '@/actions/number.js'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import axios from '@/axios'
+import utils from '@/utils'
 
 class Article extends Component {
   constructor () {
@@ -13,26 +14,27 @@ class Article extends Component {
     // this.numberAdd = this.numberAdd.bind(this)
   }
   numberAdd () {
-    debugger
+    // debugger
     let _this = this
     console.log('this', this)
     console.log('_this', _this)
     console.log('------------', this.state)
     let count = this.props.count
     count++
-    this.props.handlerNumberActions.changeCount(count)
+    this.props.numberActions.changeCount(count)
   }
   numberSubtract () {
     let count = this.props.count
     count--
-    this.props.handlerNumberActions.changeCount(count)
+    this.props.numberActions.changeCount(count)
   }
   getData () {
     let data = {
-      username: 'test4',
-      password: '123456' 
+      type: 0,
+      username: 'test4'
+      // password: '123456' 
     }
-    axios.axiosPost('http://panhuajian.com:3000/api/register', data, res => {
+    axios.axiosPost(utils.requestAddr, data, res => {
       debugger
       console.log(res)
     })
@@ -53,13 +55,14 @@ class Article extends Component {
   }
 }
 const mapStateToProps = state => {
+  // debugger
   return {
     count: state.number.count
   }
 }
 const mapActionsToProps = dispatch => {
   return {
-    handlerNumberActions: bindActionCreators(handlerNumberActions, dispatch)
+    numberActions: bindActionCreators(numberActions, dispatch)
   }
 }
 export default connect(
