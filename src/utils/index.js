@@ -5,7 +5,7 @@ export default {
   // 本地接口
   requestAddr: 'http://localhost:9999/api/register',
   async registerCheck (type, val) {
-    debugger
+    // debugger
     switch (type) {
       case 'username':
         if (val === '') {
@@ -18,7 +18,7 @@ export default {
           username: val
         }
         let result = await axios.post(this.requestAddr, data)
-        debugger
+        // debugger
         if (result.data.status === 0) {
           return '用户名已存在！'
         } else {
@@ -33,7 +33,7 @@ export default {
           return ''
         }
       default:
-        debugger
+        // debugger
     }
   }
 }
