@@ -35,8 +35,8 @@
       .active_span {
         color: $colorRed;
       }
-      & > span:nth-child(2) {
-        margin: 0 40px;
+      & > span {
+        margin-right: 40px;
       }
       .input_search {
         width: 240px;
@@ -74,6 +74,20 @@
         border: 1px solid $colorRed;
         border-radius: 20px;
         color: $colorRed;
+      }
+      .head_protrait {
+        width: 88px;
+        img {
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          margin-right: 5px;
+          border-radius: 50%;
+          line-height: 55px;
+        }
+        i {
+          font-size: 12px;
+        }
       }
       .head_write {
         width: 100px;
@@ -123,5 +137,15 @@
       color: #fff;
       border-color: $bgBlue;
     }
+  }
+}
+.username_nav {
+  i {
+    font-size: 14px;
+    color: $colorRed;
+    margin-right: 20px;
+  }
+  a {
+    color: $colorRed!important;
   }
 }
