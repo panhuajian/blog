@@ -25,7 +25,7 @@ export default class Banner extends Component {
     this.refs.bannerCont.appendChild(newNode)
     this.setState({
       bannerStyle: {
-        width: this.refs.bannerCont.children[0].offsetWidth + 'px',
+        width: this.refs.bannerCont.children[0].offsetWidth + 'px ',
         height: this.refs.bannerCont.children[0].offsetHeight + 'px'
       },
       contStyle: {
