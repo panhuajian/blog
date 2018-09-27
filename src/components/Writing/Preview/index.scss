@@ -7,12 +7,15 @@
   .preview_left {
     color: $colorBlack;
     height: 100%;
+    border-right: 1px solid $borderGray;
     & > div {
       height: 100%;
     }
-    h1 {
-      line-height: 60px;
+    input {
+      height: 60px;
       font-size: 30px;
+      border: none;
+      padding-left: 40px;
     }
     .set_tag {
       height: 40px;
@@ -35,11 +38,20 @@
         height: 100%;
         border: none;
         resize: none;
+        font-size: 18px;
       }
     }
   }
   .preview_right {
     height: 100%;
     padding: 40px 40px 80px;
+    background: #fcfaf2;
+    .preview_title {
+      color: $colorBlack;
+      font-size: 26px;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 10px;
+    }
   }
 }
