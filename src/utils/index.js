@@ -2,8 +2,15 @@ import axios from 'axios'
 export default {
   // 线上接口
   // requestAddr: 'http://panhuajian.com:3000/api/register',
+  // requestAddr: {
+  //   register: 'http://panhuajian.com:3000/api/register',
+  //   article: 'http://panhuajian.com:3000/api/article'
+  // },
   // 本地接口
-  requestAddr: 'http://localhost:9999/api/register',
+  requestAddr: {
+    register: 'http://localhost:9999/api/register',
+    article: 'http://localhost:9999/api/article'
+  },
   async registerCheck (type, val) {
     // debugger
     switch (type) {

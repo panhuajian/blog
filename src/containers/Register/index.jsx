@@ -51,7 +51,7 @@ class Register extends Component {
         username,
         password
       }
-      axios.post(utils.requestAddr, data).then(res => {
+      axios.post(utils.requestAddr.register, data).then(res => {
         if (res.data.status === 1) {
           this.context.router.history.push({
             pathname: '/'
@@ -68,7 +68,7 @@ class Register extends Component {
       username,
       password
     }
-    const result = await axios.post(utils.requestAddr, data)
+    const result = await axios.post(utils.requestAddr.register, data)
     debugger
     if (result.data.status === 1) {
       sessionStorage.setItem('username', username)

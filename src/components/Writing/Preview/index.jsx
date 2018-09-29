@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 import marked from 'marked'
 import highlightjs from 'highlight.js'
+import axios from '@/axios'
+import utils from '@/utils'
 import './index.scss'
 highlightjs.initHighlightingOnLoad()
 
@@ -17,7 +19,16 @@ export default class Priview extends Component {
     }
   }
   releaseArticle () {
-    
+    const { articleCont, articleTitle } = this.state
+    const data = {
+      type: 0,
+      title: articleTitle,
+      content: articleCont,
+      author: sessionStorage.getItem('username')
+    }
+    axios.axiosPost(utils.requestAddr.article, data, res => {
+      debugger
+    })
   }
   componentWillMount() {
     const renderer = new marked.Renderer();
