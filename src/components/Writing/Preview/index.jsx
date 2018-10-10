@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Modal, Upload, message } from 'antd'
 import marked from 'marked'
 import highlightjs from 'highlight.js'
 import axios from '@/axios'
@@ -9,13 +9,54 @@ highlightjs.initHighlightingOnLoad()
 
 let timeout = null
 let timeout2 = null
+let selectionStart = null
+let selectionEnd = null
+
+// const props = {
+//   name: 'file',
+//   action: 'http://panhuajian.com:3000/api/upload',
+//   onChange(info) {
+//     if (info.file.status !== 'uploading') {
+//       console.log(info.file)
+//       console.log(info.fileList)
+//     }
+//     if (info.file.status === 'done') {
+//       message.success(`${info.file.name} file uploaded successfully`)
+//     } else if (info.file.status === 'error') {
+//       message.error(`${info.file.name} file upload failed.`)
+//     }
+//   }
+// }
+
+function getBase64(img, callback) {
+  debugger
+  console.log('img', img)
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+  // const isJPG = file.type === 'image/jpeg';
+  // if (!isJPG) {
+  //   message.error('You can only upload JPG file!');
+  // }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  // return isJPG && isLt2M;
+  return isLt2M
+}
 
 export default class Priview extends Component {
   constructor () {
     super()
     this.state = {
       articleCont: '',
-      articleTitle: ''
+      articleTitle: '',
+      visible: false,
+      imageUrl: ''
     }
   }
   releaseArticle () {
@@ -28,6 +69,48 @@ export default class Priview extends Component {
     }
     axios.axiosPost(utils.requestAddr.article, data, res => {
       debugger
+    })
+  }
+  handleOk = () => {
+    // console.log(e);
+    this.setState({
+      visible: false
+    })
+  }
+  handleCancel = () => {
+    // console.log(e);
+    this.setState({
+      visible: false
+    })
+  }
+  handleChange = (info) => {
+    // debugger
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, imageUrl => {
+        debugger
+        this.setState({
+          imageUrl,
+          loading: false,
+        })
+      })
+      debugger
+      const obj = this.refs.article
+      const str = `![avatar](http://panhuajian.com${info.file.response.data})`
+      let cursorPos = selectionStart
+      const tmpStr = obj.value
+      obj.value = tmpStr.substring(0, selectionStart) + str + tmpStr.substring(selectionEnd, tmpStr.length);
+      cursorPos += str.length;
+      obj.selectionStart = obj.selectionEnd = cursorPos;
+    }
+  }
+  insertImg () {
+    this.setState({
+      visible: true
     })
   }
   componentWillMount() {
@@ -65,9 +148,11 @@ export default class Priview extends Component {
     }, 1000)
   }
   tabHandler (e) {
+    const obj = this.refs.article
+    selectionStart = obj.selectionStart
+    selectionEnd = obj.selectionEnd
     if (e.keyCode === 9) {
       // if (!this.textareValue) this.textareValue= ''
-      const obj = this.refs.article
       const str = '    '
       if (document.selection) {
         let sel = document.selection.createRange();
@@ -106,7 +191,8 @@ export default class Priview extends Component {
     }, 1000)
   }
   render () {
-    const { articleCont, articleTitle } = this.state
+    const { articleCont, articleTitle, visible, imageUrl } = this.state
+    console.log('imgurl', imageUrl)
     // console.log(articleCont)
     // console.log('1111111111111111111', articleCont === '```\n11111\n```')
     return (
@@ -116,7 +202,8 @@ export default class Priview extends Component {
             <div>
               <input defaultValue="文章标题" ref="articleTitle" onKeyUp={this.changeArticleTitle.bind(this)}/>
               <div className="set_tag">
-                <span onClick={this.releaseArticle.bind(this)}>发布文章</span>
+                <span onClick={this.insertImg.bind(this)}><i className="iconfont icon-tupian"></i> 插入图片</span>
+                <span onClick={this.releaseArticle.bind(this)}><i className="iconfont icon-fabu"></i> 发布文章</span>
               </div>
               <div className="article_cont">
                 <textarea onKeyUp={this.previewHandler.bind(this)} ref="article" onKeyDown={this.tabHandler.bind(this)}></textarea>
@@ -129,6 +216,25 @@ export default class Priview extends Component {
             <div className="preview_article" ref="previewArticle" dangerouslySetInnerHTML={{ __html: marked(articleCont)}}></div>
           </Col>
         </Row>
+        <Modal
+          title="插入图片"
+          visible={visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action='http://panhuajian.com:3000/api/upload'
+            beforeUpload={beforeUpload}
+            onChange={this.handleChange}
+          >
+            <a className="upload_img">点击上传(可多张)</a>
+            {/* {imageUrl && <img src={imageUrl} alt="avatar" />} */}
+          </Upload>
+        </Modal>
       </div>
     )
   }

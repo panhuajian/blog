@@ -9,7 +9,8 @@ export default {
   // 本地接口
   requestAddr: {
     register: 'http://localhost:9999/api/register',
-    article: 'http://localhost:9999/api/article'
+    article: 'http://localhost:9999/api/article',
+    upload: 'http://localhost:9999/api/upload'
   },
   async registerCheck (type, val) {
     // debugger

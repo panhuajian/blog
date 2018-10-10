@@ -11,7 +11,7 @@ export default class BlogRouter extends Component {
       <Router>
         <div style={{height: '100%'}}>
           <Route exact path="/" component={ Home }></Route>
-          <Route path="/article" component={ Article }></Route>
+          <Route path="/article/:id" component={ Article }></Route>
           <Route path="/writing" component={ Writing }></Route>
           <Route path="/register" component={ Register }></Route>
         </div>

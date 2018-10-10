@@ -97,12 +97,20 @@ export default class Head extends Component {
   }
   // 路由跳转并传参
   jumpWriting () {
-    this.context.router.history.push({
-      pathname: '/writing',
-      params: {
-        id: 222233333
-      }
-    })
+    const username = sessionStorage.getItem('username')
+    if (username) {
+      this.context.router.history.push({
+        pathname: '/writing/preview',
+        params: {
+          id: 222233333
+        }
+      })
+    } else {
+      this.context.router.history.push({
+        pathname: '/register'
+      })
+      this.props.registerActions.setRegisterType('login')
+    }
   }
   registerHandler () {
     this.context.router.history.push({
@@ -113,7 +121,7 @@ export default class Head extends Component {
   loginHandler () {
     this.context.router.history.push({
       pathname: '/register'
-    })
+    })  
     this.props.registerActions.setRegisterType('login')
   }
   // setContentHtml () {

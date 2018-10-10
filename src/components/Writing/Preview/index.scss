@@ -53,5 +53,24 @@
       line-height: 40px;
       margin-bottom: 10px;
     }
+    pre {
+      border-radius: 4px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 700px;
+    }
   }
+}
+.ant-modal-body {
+  text-align: center;
+}
+.upload_img {
+  width: 320px;
+  height: 42px;
+  background: $bgNeight;
+  color: #fff;
+  line-height: 42px;
+  text-align: center;
 }

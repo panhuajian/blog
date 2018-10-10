@@ -104,7 +104,7 @@ class Article extends Component {
   componentDidMount () {
     debugger
     // console.log('props', this.props)
-    const id = window.location.href.split('?')[1].split('=')[1] * 1
+    const id = window.location.href.split('/').pop()
     const data = {
       type: 2,
       id
