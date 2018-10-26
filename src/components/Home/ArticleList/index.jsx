@@ -1,24 +1,29 @@
 import React, { Component } from 'react'
-import ArticleData from '@/assets/mock/article.json'
+// import ArticleData from '@/assets/mock/article.json'
 import articleImg from '@/assets/img/article.png'
+import axios from '@/axios'
+import utils from '@/utils'
 import { Link } from 'react-router-dom'
 import './index.scss'
 
 export default class ArticleList extends Component {
   constructor () {
     super()
-    this.state = {}
+    this.state = {
+      articleData: null
+    }
   }
   render () {
+    const { articleData } = this.state
     return (
       <div className="article_list">
-        <ul>
-          {ArticleData.map((item, i) => {
+        {articleData && <ul>
+          {articleData.map((item, i) => {
             return (
               <li key={i}>
                 <div className="li_content">
                   {/* 路由跳转并穿传参 */}
-                  <Link to={{pathname: '/article', params: {id: 1111222222222}}} className="title">{item.title}</Link>
+                  <Link to={{pathname: `/article/${item.id}`, params: {id: item.id}, query: {id: item.id}}} className="title">{item.title}</Link>
                   <p className="cont">{item.content}</p>
                   <div className="other_info">
                     <span>{item.author}</span>
@@ -31,8 +36,19 @@ export default class ArticleList extends Component {
               </li>
             )
           })}
-        </ul>
+        </ul>}
       </div>
     )
+  }
+  componentDidMount () {
+    const data = {
+      type: 1
+    }
+    axios.axiosPost(utils.requestAddr.article, data, res => {
+      debugger
+      this.setState({
+        articleData: res.data.data
+      })
+    })
   }
 }

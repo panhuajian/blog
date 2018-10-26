@@ -1,4 +1,4 @@
-// import * as actionTypes from '../constants/number.js'
+// import * as actionTypes from '../constants/other.js'
 import initState from '@/store/initState.js'
 import { combineReducers } from 'redux'
 

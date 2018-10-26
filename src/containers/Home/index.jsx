@@ -13,8 +13,8 @@ class Home extends Component {
       <div className="home">
         <Head registerActions={registerActions}></Head>
         <div className="blog_cont">
-          <ContRight></ContRight>
           <ContLeft></ContLeft>
+          <ContRight></ContRight>
         </div>
       </div>
     )

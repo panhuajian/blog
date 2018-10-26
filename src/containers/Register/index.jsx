@@ -11,7 +11,6 @@ import { Tooltip, message } from 'antd'
 class Register extends Component {
   constructor (props) {
     super(props)
-    console.log('1111111111', this)
     this.state = {
       errorUsernameTips: '',
       errorPasswordTips: ''
@@ -29,33 +28,11 @@ class Register extends Component {
     debugger
     switch (type) {
       case 'username':
-        // if (errorTips) {
-        //   this.setState({
-        //     errorUsernameTips: errorTips,
-        //     checkType: type
-        //   })
-        // } else {
-        //   this.setState({
-        //     errorUsernameTips: '',
-        //     checkType: type
-        //   })
-        // }
         this.setState({
           errorUsernameTips: errorTips
         })
         break
       case 'password':
-        // if (errorTips) {
-        //   this.setState({
-        //     errorPasswordTips: errorTips,
-        //     checkType: type
-        //   })
-        // } else {
-        //   this.setState({
-        //     errorPasswordTips: '',
-        //     checkType: type
-        //   })
-        // }
         this.setState({
           errorPasswordTips: errorTips
         })
@@ -74,7 +51,7 @@ class Register extends Component {
         username,
         password
       }
-      axios.post(utils.requestAddr, data).then(res => {
+      axios.post(utils.requestAddr.register, data).then(res => {
         if (res.data.status === 1) {
           this.context.router.history.push({
             pathname: '/'
@@ -91,8 +68,10 @@ class Register extends Component {
       username,
       password
     }
-    const result = await axios.post(utils.requestAddr, data)
+    const result = await axios.post(utils.requestAddr.register, data)
+    debugger
     if (result.data.status === 1) {
+      sessionStorage.setItem('username', username)
       this.context.router.history.push({
         pathname: '/'
       })

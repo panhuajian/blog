@@ -8,3 +8,9 @@ body {
 #root, .App {
   height: 100%;
 }
+a, span {
+  display: inline-block;
+}
+input, select, textarea {
+  outline: none;
+}
