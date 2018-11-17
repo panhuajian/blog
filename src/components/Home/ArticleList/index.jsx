@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom'
 import './index.scss'
 
 export default class ArticleList extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       articleData: null
     }
   }
-  render () {
+  render() {
     const { articleData } = this.state
     return (
       <div className="article_list">
@@ -23,7 +23,7 @@ export default class ArticleList extends Component {
               <li key={i}>
                 <div className="li_content">
                   {/* 路由跳转并穿传参 */}
-                  <Link to={{pathname: `/article/${item.id}`, params: {id: item.id}, query: {id: item.id}}} className="title">{item.title}</Link>
+                  <Link to={{ pathname: `/article/${item.id}`, params: { id: item.id }, query: { id: item.id } }} className="title">{item.title}</Link>
                   <p className="cont">{item.content}</p>
                   <div className="other_info">
                     <span>{item.author}</span>
@@ -32,7 +32,7 @@ export default class ArticleList extends Component {
                     <span><i className="iconfont icon-zj-"></i> {item.reward}</span>
                   </div>
                 </div>
-                <div className="article_img"><img src={articleImg} alt=""/></div>
+                <div className="article_img"><img src={articleImg} alt="" /></div>
               </li>
             )
           })}
@@ -40,12 +40,12 @@ export default class ArticleList extends Component {
       </div>
     )
   }
-  componentDidMount () {
+  componentDidMount() {
     const data = {
       type: 1
     }
     axios.axiosPost(utils.requestAddr.article, data, res => {
-      debugger
+      // debugger
       this.setState({
         articleData: res.data.data
       })

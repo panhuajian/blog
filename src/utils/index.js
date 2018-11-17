@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 export default {
   // 线上接口
   // requestAddr: 'http://panhuajian.com:3000/api/register',
@@ -12,7 +13,7 @@ export default {
     article: 'http://localhost:9999/api/article',
     upload: 'http://localhost:9999/api/upload'
   },
-  async registerCheck (type, val) {
+  async registerCheck(type, val) {
     // debugger
     switch (type) {
       case 'username':
@@ -45,3 +46,32 @@ export default {
     }
   }
 }
+
+/**
+ *  从localstorage里取出内存 key
+ */
+
+let compose = _.flowRight
+let map = _.curry((f, arr) => arr.map(f))
+let IO = function (f) {
+  this.__value = f
+}
+IO.of = x => new IO(_ => x)
+
+IO.prototype.map = function (f) {
+  return new IO(compose(f, this.__value))
+}
+IO.prototype.join = function () {
+  return this.__value ? IO.of(null) : this.__value()
+}
+
+const localStorage = new IO(_ => window.localStorage)
+
+let getItem = _.curry((key, arr) => arr.getItem(key))
+
+let setItem = _.curry((key, value, arr) => arr.setItem(key, value))
+
+
+export let getLocalData = key => map(getItem(key), localStorage)
+
+export let setLocalData = (key, val) => map(setItem(key, val), localStorage)
