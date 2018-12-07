@@ -1,5 +1,8 @@
 import axios from 'axios'
 import _ from 'lodash'
+
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:9999/api' : 'http://panhuajian.com:3000/api'
+
 export default {
   // 线上接口
   // requestAddr: 'http://panhuajian.com:3000/api/register',
@@ -9,9 +12,10 @@ export default {
   // },
   // 本地接口
   requestAddr: {
-    register: 'http://localhost:9999/api/register',
-    article: 'http://localhost:9999/api/article',
-    upload: 'http://localhost:9999/api/upload'
+    register: `${baseUrl}/register`,
+    article: `${baseUrl}/article`,
+    upload: `${baseUrl}/upload`,
+    trendingSearch: `${baseUrl}/trending_search`
   },
   async registerCheck(type, val) {
     // debugger
@@ -51,8 +55,9 @@ export default {
  *  从localstorage里取出内存 key
  */
 
-let compose = _.flowRight
-let map = _.curry((f, arr) => arr.map(f))
+export let compose = _.flowRight
+export let map = _.curry((f, arr) => arr.map(f))
+export let slice = _.curry((arg, arr) => _.isArray(arg) ? arr.slice(...arg) : arr.slice(arg))
 let IO = function (f) {
   this.__value = f
 }
@@ -71,7 +76,10 @@ let getItem = _.curry((key, arr) => arr.getItem(key))
 
 let setItem = _.curry((key, value, arr) => arr.setItem(key, value))
 
+// 封装两个方法
 
-export let getLocalData = key => map(getItem(key), localStorage)
 
-export let setLocalData = (key, val) => map(setItem(key, val), localStorage)
+export let localData = {
+  getLocalData: key => map(getItem(key), localStorage).__value(),
+  setLocalData: (key, val) => map(setItem(key, val), localStorage).__value()
+}

@@ -2,11 +2,13 @@
   height: 56px;
   line-height: 55px;
   border-bottom: 1px solid #f0f0f0;
+
   .head_cont {
     height: 55px;
     width: 1440px;
     margin: 0 auto;
     position: relative;
+
     .head_logo {
       color: $colorRed;
       font-size: 26px;
@@ -17,6 +19,7 @@
       left: 0;
       font-weight: 700;
     }
+
     .head_center {
       width: 945px;
       height: 55px;
@@ -24,39 +27,33 @@
       margin: 0 auto;
       padding: 0 10px;
       font-size: 17px;
+
       span {
         color: $colorBlack;
         font-size: 20px;
         cursor: pointer;
       }
+
       i {
         font-size: 20px;
       }
+
       .active_span {
         color: $colorRed;
       }
-      & > span {
+
+      &>span {
         margin-right: 40px;
       }
-      .input_search {
-        width: 240px;
-        transition: width .5s linear;
-      }
-      .input_search input {
-        background: #eee;
-        border-radius: 16px;
-        outline: none;
-      }
-      .input_search_focused {
-        width: 320px;
-      }
     }
+
     .head_set {
       position: absolute;
       top: 0;
       right: 0;
       height: 55px;
       font-size: 16px;
+
       span {
         display: inline-block;
         margin-right: 30px;
@@ -64,9 +61,11 @@
         text-align: center;
         cursor: pointer;
       }
+
       .head_style {
         font-weight: 700;
       }
+
       .head_register {
         width: 80px;
         height: 38px;
@@ -75,8 +74,10 @@
         border-radius: 20px;
         color: $colorRed;
       }
+
       .head_protrait {
         width: 88px;
+
         img {
           width: 40px;
           height: 40px;
@@ -85,10 +86,12 @@
           border-radius: 50%;
           line-height: 55px;
         }
+
         i {
           font-size: 12px;
         }
       }
+
       .head_write {
         width: 100px;
         height: 40px;
@@ -101,10 +104,12 @@
     }
   }
 }
+
 .sytle_popover {
   .ant-popover-title {
     padding: 0;
   }
+
   .set_title {
     color: $colorGray;
     height: 100px;
@@ -114,6 +119,7 @@
     font-size: 14px;
     display: flex;
     justify-content: space-between;
+
     .title_button {
       width: 44px;
       height: 40px;
@@ -122,16 +128,19 @@
       line-height: 38px;
       border-radius: 0;
     }
+
     .title_turn_on {
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       border-right: none;
     }
+
     .title_turn_off {
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
       border-left: none;
     }
+
     .title_button_active {
       background: $bgBlue;
       color: #fff;
@@ -139,13 +148,15 @@
     }
   }
 }
+
 .username_nav {
   i {
     font-size: 14px;
     color: $colorRed;
     margin-right: 20px;
   }
+
   a {
-    color: $colorRed!important;
+    color: $colorRed !important;
   }
 }

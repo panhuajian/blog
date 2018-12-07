@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Search from './search'
+import Search from './search/search'
 import { Popover, Button, Menu, Dropdown } from 'antd'
 import './index.scss'
 import headProtrait from '@/assets/img/head_protrait.jpg'
