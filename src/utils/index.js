@@ -4,7 +4,8 @@ export default {
   // requestAddr: 'http://panhuajian.com:3000/api/register',
   // requestAddr: {
   //   register: 'http://panhuajian.com:3000/api/register',
-  //   article: 'http://panhuajian.com:3000/api/article'
+  //   article: 'http://panhuajian.com:3000/api/article',
+  //   upload: 'http://panhuajian.com:3000/api/upload'
   // },
   // 本地接口
   requestAddr: {
@@ -25,7 +26,7 @@ export default {
           type: 0,
           username: val
         }
-        let result = await axios.post(this.requestAddr, data)
+        let result = await axios.post(this.requestAddr.register, data)
         // debugger
         if (result.data.status === 0) {
           return '用户名已存在！'

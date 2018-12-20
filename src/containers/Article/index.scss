@@ -15,6 +15,7 @@
     margin: 30px 0 40px;
     height: 48px;
     display: flex;
+    position: relative;
     img {
       width: 48px;
       height: 48px;
@@ -25,6 +26,23 @@
       display: inline-block;
       line-height: 24px;
       margin-bottom: 0;
+      font-size: 16px;
+      color: $colorBlack;
+    }
+    span {
+      font-size: 12px;
+      color: $colorGray2;
+    }
+    .modify_article {
+      position: absolute;
+      padding: 0 12px;
+      line-height: 30px;
+      top: 8px;
+      right: 0;
+      border: 1px solid $borderGray;
+      border-radius: 15px;
+      font-size: 14px;
+      color: $colorGray2;
     }
   }
   .article_cont {
@@ -36,6 +54,11 @@
     }
     pre {
       border-radius: 4px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 700px;
     }
   }
 }

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Row, Col, Modal, Upload, message } from 'antd'
+import PropTypes from 'prop-types'
 import marked from 'marked'
 import highlightjs from 'highlight.js'
 import axios from '@/axios'
 import utils from '@/utils'
 import './index.scss'
+import moment from 'moment'
 highlightjs.initHighlightingOnLoad()
 
 let timeout = null
@@ -29,7 +31,7 @@ let selectionEnd = null
 // }
 
 function getBase64(img, callback) {
-  debugger
+  // debugger
   console.log('img', img)
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
@@ -56,19 +58,56 @@ export default class Priview extends Component {
       articleCont: '',
       articleTitle: '',
       visible: false,
-      imageUrl: ''
+      imageUrl: '',
+      id: window.location.href.split('/').pop()
     }
   }
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
   releaseArticle () {
+    // debugger
     const { articleCont, articleTitle } = this.state
     const data = {
       type: 0,
       title: articleTitle,
       content: articleCont,
-      author: sessionStorage.getItem('username')
+      author: sessionStorage.getItem('username'),
+      releaseTime: moment(new Date()).format('YYYY-MM-DD hh:mm:ss')
     }
     axios.axiosPost(utils.requestAddr.article, data, res => {
-      debugger
+      // debugger
+      if (res.data.status === 1) {
+        this.context.router.history.push({
+          pathname: '/',
+          params: {
+            id: 222233333
+          }
+        })
+      }
+    })
+  }
+  updateArticle () {
+    // debugger
+    const { articleCont, articleTitle, id } = this.state
+    const data = {
+      type: 4,
+      title: articleTitle,
+      content: articleCont,
+      author: sessionStorage.getItem('username'),
+      releaseTime: moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+      id: id * 1
+    }
+    axios.axiosPost(utils.requestAddr.article, data, res => {
+      // debugger
+      if (res.data.status === 1) {
+        this.context.router.history.push({
+          pathname: '/',
+          params: {
+            id: 222233333
+          }
+        })
+      }
     })
   }
   handleOk = () => {
@@ -92,13 +131,13 @@ export default class Priview extends Component {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
-        debugger
+        // debugger
         this.setState({
           imageUrl,
           loading: false,
         })
       })
-      debugger
+      // debugger
       const obj = this.refs.article
       const str = `![avatar](http://panhuajian.com${info.file.response.data})`
       let cursorPos = selectionStart
@@ -191,8 +230,9 @@ export default class Priview extends Component {
     }, 1000)
   }
   render () {
-    const { articleCont, articleTitle, visible, imageUrl } = this.state
+    const { articleCont, articleTitle, visible, imageUrl, id } = this.state
     console.log('imgurl', imageUrl)
+    console.log('props', this.props)
     // console.log(articleCont)
     // console.log('1111111111111111111', articleCont === '```\n11111\n```')
     return (
@@ -203,7 +243,9 @@ export default class Priview extends Component {
               <input defaultValue="文章标题" ref="articleTitle" onKeyUp={this.changeArticleTitle.bind(this)}/>
               <div className="set_tag">
                 <span onClick={this.insertImg.bind(this)}><i className="iconfont icon-tupian"></i> 插入图片</span>
-                <span onClick={this.releaseArticle.bind(this)}><i className="iconfont icon-fabu"></i> 发布文章</span>
+                {!id && <span onClick={this.releaseArticle.bind(this)}><i className="iconfont icon-fabu"></i> 发布文章</span>}
+                {id && <span onClick={this.updateArticle.bind(this)}><i className="iconfont icon-fabu"></i> 更新文章</span>}
+                <span className="explain">支持MarkDown语法</span>
               </div>
               <div className="article_cont">
                 <textarea onKeyUp={this.previewHandler.bind(this)} ref="article" onKeyDown={this.tabHandler.bind(this)}></textarea>
@@ -239,8 +281,23 @@ export default class Priview extends Component {
     )
   }
   componentDidMount () {
+    const { id } = this.state
     this.setState({
       articleTitle: this.refs.articleTitle.value
     })
-  }
+    if (id) {
+      const data = {
+        type: 2,
+        id
+      }
+      axios.axiosPost(utils.requestAddr.article, data, res => {
+        // debugger
+        this.setState({
+          articleCont: res.data.data.content,
+          articleTitle: res.data.data.title,
+        })
+        this.refs.article.value = res.data.data.content
+      })
+    }
+    }
 }

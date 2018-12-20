@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import ArticleData from '@/assets/mock/article.json'
-import articleImg from '@/assets/img/article.png'
+// import articleImg from '@/assets/img/article.png'
 import axios from '@/axios'
 import utils from '@/utils'
 import { Link } from 'react-router-dom'
@@ -15,6 +15,7 @@ export default class ArticleList extends Component {
   }
   render () {
     const { articleData } = this.state
+    console.log('articleData', articleData)
     return (
       <div className="article_list">
         {articleData && <ul>
@@ -32,7 +33,7 @@ export default class ArticleList extends Component {
                     <span><i className="iconfont icon-zj-"></i> {item.reward}</span>
                   </div>
                 </div>
-                <div className="article_img"><img src={articleImg} alt=""/></div>
+                {item.content.indexOf('![avatar](') > -1 && <div className="article_img"><img src={item.content.split('![avatar](')[1].split(')')[0]} alt=""/></div>}
               </li>
             )
           })}
@@ -45,7 +46,7 @@ export default class ArticleList extends Component {
       type: 1
     }
     axios.axiosPost(utils.requestAddr.article, data, res => {
-      debugger
+      // debugger
       this.setState({
         articleData: res.data.data
       })

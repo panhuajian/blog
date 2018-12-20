@@ -2,39 +2,11 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Input, Popover, Button, Menu, Dropdown } from 'antd'
+import { Link } from 'react-router-dom'
 import './index.scss'
 import headProtrait from '@/assets/img/head_protrait.jpg'
 
 const Search = Input.Search
-
-const menu = (
-  <Menu className="username_nav">
-    <Menu.Item>
-      <a><i className="iconfont icon-yonghu"></i>我的主页</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-biaoqian"></i>收藏的文章</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-xin_"></i>喜欢的文章</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-zuanshi"></i>已购内容</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-qianbao2"></i>我的钱包</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-shezhi"></i>设置</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-duanxin"></i>帮助与反馈</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a><i className="iconfont icon-tuichu"></i>退出</a>
-    </Menu.Item>
-  </Menu>
-)
 
 export default class Head extends Component {
   constructor () {
@@ -44,7 +16,8 @@ export default class Head extends Component {
       isFocus: false,
       isNight: false,
       isShowPopover: false,
-      currentSpan: sessionStorage.getItem('username') ? 'discover' : 'home'
+      currentSpan: sessionStorage.getItem('username') ? 'discover' : 'home',
+      count: 0
     }
   }
   static contextTypes = {
@@ -124,6 +97,48 @@ export default class Head extends Component {
     })  
     this.props.registerActions.setRegisterType('login')
   }
+  // 退出登录
+  exitHandler () {
+    sessionStorage.setItem('username', '')
+    this.context.router.history.push({
+      pathname: '/',
+      params: {
+        id: 222233333
+      }
+    })
+    window.location.reload(true)
+  }
+  // 菜单
+  menu () {
+    return (
+      <Menu className="username_nav">
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-yonghu"></i>我的主页</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-biaoqian"></i>收藏的文章</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-xin_"></i>喜欢的文章</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-zuanshi"></i>已购内容</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-qianbao2"></i>我的钱包</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-shezhi"></i>设置</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={{pathname: '/my', params: {}, query: {}}}><i className="iconfont icon-duanxin"></i>帮助与反馈</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <a onClick={this.exitHandler.bind(this)}><i className="iconfont icon-tuichu"></i>退出</a>
+    </Menu.Item>
+  </Menu>
+    )
+  }
   // setContentHtml () {
   //   return (
   //     <div className="set_cont">
@@ -138,15 +153,36 @@ export default class Head extends Component {
   //     </div>
   //   )
   // }
+  add () {
+    // let count = this.state.count
+    // console.log(++this.state.count)
+    console.log(++this.state.count)
+    // console.log(11111111111)
+    // count++
+    // this.setState({
+    //   count: ++this.state.count
+    // })
+  }
+  shouldComponentUpdate (nextState, nextProps) {
+    console.log('nextProps', nextProps)
+    console.log('nextState', nextState)
+    console.log('this.props', this.props)
+    console.log('this.state', this.state)
+    return true
+  }
   render () {
     // console.log(1111111111111111)
     const username = sessionStorage.getItem('username')
-    const { currentSpan, isFocus } = this.state
+    const { currentSpan, isFocus, count } = this.state
     console.log('this.context', this.context)
     return (
       <div className="head">
         <div className="head_cont">
-          <div className="head_logo">墨痕</div>
+          <Link to={{pathname: '/', params: {}, query: {}}} className="head_logo">墨书</Link>
+          {/* <a href="/my" onClick={e => {e.preventDefault()}}>百度</a> */}
+          {/* <span>{count}</span> */}
+          {/* <button onClick={() => this.state.count++}>按钮1</button> */}
+          {/* <button onClick={() => this.add()}>按钮2</button> */}
           <div className="head_center">
             { !username && <span className={currentSpan === 'home' ? 'active_span' : ''} onClick={this.changeCurrentSpan.bind(this, 'home')}><i className="iconfont icon-shouye"></i> 首页</span> }
             { !username && <span className={currentSpan === 'donwload' ? 'active_span' : ''} onClick={this.changeCurrentSpan.bind(this, 'donwload')}><i className="iconfont icon-shoujixiazai"></i> 下载App</span> }
@@ -161,7 +197,7 @@ export default class Head extends Component {
             </Popover>
             { !username && <span className="head_login" onClick={this.loginHandler.bind(this)}>登录</span> }
             { !username && <span className="head_register" onClick={this.registerHandler.bind(this)}>注册</span> }
-            { username && <Dropdown overlay={menu} placement="bottomCenter">
+            { username && <Dropdown overlay={this.menu()} placement="bottomCenter">
               <span className="head_protrait">
                 <img src={headProtrait} alt=""/><i className="iconfont icon-arrLeft-fill"></i>
               </span>
@@ -171,5 +207,8 @@ export default class Head extends Component {
         </div>
       </div>
     )
+  }
+  componentDidUpdate () {
+    console.log('componentDidUpdate')
   }
 }

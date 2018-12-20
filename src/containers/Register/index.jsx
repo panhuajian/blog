@@ -22,10 +22,12 @@ class Register extends Component {
   toggleType (type) {
     this.props.registerActions.setRegisterType(type)
   }
+  // 检查用户注册信息
   async registerCheck (type, e) {
+    // debugger
     let val = e.target.value
     let errorTips = await utils.registerCheck(type, val)
-    debugger
+    // debugger
     switch (type) {
       case 'username':
         this.setState({
@@ -69,7 +71,7 @@ class Register extends Component {
       password
     }
     const result = await axios.post(utils.requestAddr.register, data)
-    debugger
+    // debugger
     if (result.data.status === 1) {
       sessionStorage.setItem('username', username)
       this.context.router.history.push({
@@ -79,6 +81,16 @@ class Register extends Component {
      (() => {
       message.error('用户名或密码错误，请重新输入！')
      })()
+    }
+  }
+  keyUpHandler (e, type) {
+    const { registerType } = this.props
+    if (e.keyCode === 13) {
+      if (registerType === 'login') {
+        this.loginHandler()
+      } else {
+        this.registerHandler()
+      }
     }
   }
   render () {
@@ -97,12 +109,12 @@ class Register extends Component {
           </div>
           <div className="cont_info">
             <Tooltip placement="right" title={errorUsernameTips} visible={errorUsernameTips ? true : false}>
-              <div><i className="iconfont icon-yonghu"></i><input className="username_info" type="text" placeholder="你的用户名" ref="username" onBlur={registerType === 'register' ? this.registerCheck.bind(this, 'username') : null}/></div>
+              <div><i className="iconfont icon-yonghu"></i><input className="username_info" type="text" placeholder="用户名" ref="username" onKeyUp={this.keyUpHandler.bind(this)} onBlur={registerType === 'register' ? this.registerCheck.bind(this, 'username') : null}/></div>
             </Tooltip>
             {false && <div><i className="iconfont icon-shouji"></i><input className="username_info" type="text" placeholder="手机号"/></div>}
             {false && <div><i className="iconfont icon-gouSolid"></i><input className="username_info" type="text" placeholder="手机验证码"/></div>}
             <Tooltip placement="right" title={errorPasswordTips} visible={errorPasswordTips ? true : false}>
-              <div><i className="iconfont icon-mima"></i><input className="username_info" type="password" placeholder="设置密码" ref="password" onBlur={registerType === 'register' ? this.registerCheck.bind(this, 'password') : null}/></div>
+              <div><i className="iconfont icon-mima"></i><input className="username_info" type="password" placeholder={registerType === 'login' ? '密码' : '设置密码'} ref="password" onKeyUp={this.keyUpHandler.bind(this)} onBlur={registerType === 'register' ? this.registerCheck.bind(this, 'password') : null}/></div>
             </Tooltip>
             {registerType === 'login' && <div className="remember_me">
               <label htmlFor=""><input type="checkbox"/> 记住我</label>

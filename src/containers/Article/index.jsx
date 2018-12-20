@@ -3,6 +3,7 @@ import * as numberActions from '@/actions/other.js'
 import * as registerActions from '@/actions/register'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import headProtrait from '@/assets/img/head_protrait.jpg'
 import Head from '@/components/Head'
 import axios from '@/axios'
@@ -21,7 +22,8 @@ class Article extends Component {
       articleCont: '',
       articleTitle: '',
       author: '',
-      time: ''
+      time: '',
+      id: window.location.href.split('/').pop()
     }
     // this.numberAdd = this.numberAdd.bind(this)
   }
@@ -47,7 +49,7 @@ class Article extends Component {
       // password: '123456' 
     }
     axios.axiosPost(utils.requestAddr, data, res => {
-      debugger
+      // debugger
       console.log(res)
     })
   }
@@ -74,7 +76,8 @@ class Article extends Component {
   }
   render () {
     console.log('+++++++++++', this.props)
-    const { articleCont, articleTitle, author, time } = this.state
+    const { articleCont, articleTitle, author, time, id } = this.state
+    console.log('id', id)
     return (
       <div className="article">
         {/* <p>{this.props.count}</p>
@@ -95,6 +98,7 @@ class Article extends Component {
                 <span>{time}</span>
               </li>
             </ul>
+            {sessionStorage.getItem('username') === author && <Link to={{pathname: `/writing/preview/${id}`, params: {id}, query: {id}}} className="modify_article">编辑文章</Link>}
           </div>
           <div className="article_cont" dangerouslySetInnerHTML={{ __html: marked(articleCont)}}></div>
         </div>
@@ -102,20 +106,20 @@ class Article extends Component {
     )
   }
   componentDidMount () {
-    debugger
+    // debugger
     // console.log('props', this.props)
-    const id = window.location.href.split('/').pop()
+    const { id } = this.state
     const data = {
       type: 2,
       id
     }
     axios.axiosPost(utils.requestAddr.article, data, res => {
-      debugger
+      // debugger
       this.setState({
         articleCont: res.data.data.content,
         articleTitle: res.data.data.title,
         author: res.data.data.author,
-        time: res.data.data.setTime
+        time: res.data.data.releaseTime
       })
     })
   }
