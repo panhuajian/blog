@@ -59,7 +59,11 @@ export default class Head extends Component {
     return (
       <div className="set_title">
         <div>
+<<<<<<< HEAD
           <span><i className="iconfont icon-gray-moon" ref="moom"></i> 夜间模式12</span>
+=======
+          <span><i className="iconfont icon-gray-moon" ref="moom"></i> 夜间模式</span>
+>>>>>>> parent of a0f11e5... git测试1
         </div>
         <div>
           <Button className={this.state.isNight ? 'title_button title_turn_on title_button_active' : 'title_button title_turn_on'} onClick={this.toggleModel.bind(this, 'night')}>开</Button>
